@@ -14,7 +14,7 @@ def extract_from_pdf(file):
 
 def extract_from_image(file):
     img = Image.open(file)
-    return pytesseract.image_to_string(img)
+    return "Image OCR not supported in cloud. Please upload PDF."
 
 def extract_text(file):
     if file.type == "application/pdf":
