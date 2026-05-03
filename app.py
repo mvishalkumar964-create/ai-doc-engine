@@ -24,7 +24,9 @@ if uploaded_file:
 
     # AI Analysis
     with st.spinner("Analyzing document..."):
-        result = analyze_document(text)   # ✅ FIXED
+        short_text = text[:1000]   # 👈 limit
+
+result = analyze_document(short_text)
 
     st.subheader("🧠 AI Output")
     st.code(result, language="json")
