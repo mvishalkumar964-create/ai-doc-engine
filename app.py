@@ -6,27 +6,26 @@ st.set_page_config(page_title="AI Document Engine", layout="wide")
 
 st.title("📄 AI Document Intelligence Engine")
 
-uploaded_file = st.file_uploader(
-    "Upload PDF / Image",
-    type=["pdf", "png", "jpg", "jpeg"]
-)
+# Upload file
+uploaded_file = st.file_uploader("Upload PDF / Image", type=["pdf", "png", "jpg", "jpeg"])
 
-if uploaded_file:
-
+if uploaded_file is not None:
     st.success("✅ File Uploaded")
 
     # Extract text
-    with st.spinner("Extracting text..."):
-        text = extract_text(uploaded_file)
+    text = extract_text(uploaded_file)
 
     st.subheader("📜 Extracted Text")
-    st.text_area("", text[:2000], height=200)
+    st.text_area("", text, height=200)
 
-    # AI Analysis
-    with st.spinner("Analyzing document..."):
-        short_text = text[:1000]   # 👈 limit
+    # ✅ TEXT LIMIT (IMPORTANT FIX)
+    short_text = text[:1000]
 
-result = analyze_document(short_text)
-
+    # Analyze with spinner
     st.subheader("🧠 AI Output")
+
+    with st.spinner("⚡ AI is analyzing... Please wait"):
+        result = analyze_document(short_text)
+
+    # Show result
     st.code(result, language="json")
